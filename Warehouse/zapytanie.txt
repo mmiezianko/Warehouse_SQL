@@ -1,0 +1,7 @@
+SELECT Towary.IdTowaru,`Obroty`.`DataObrotu`, `Obroty`.`Typ`, `Towary`.`NazwaTowaru`, `Obroty`.`JednostkaMiary`, `Cennik`.`Cena`, `Obroty`.`Ilosc`
+FROM `Obroty` 
+	INNER JOIN JednostkiMiary ON Obroty.JednostkaMiary = JednostkiMiary.JednostkaMiary
+	INNER JOIN `Towary` ON `Obroty`.`IdTowaru` = `Towary`.`IdTowaru` 
+	INNER JOIN `Cennik` ON `Cennik`.`IdTowaru` = `Towary`.`IdTowaru`
+	AND Obroty.DataObrotu >= Cennik.DataOd 
+AND (Obroty.DataObrotu < Cennik.DataDo OR Cennik.DataDo IS NULL)
